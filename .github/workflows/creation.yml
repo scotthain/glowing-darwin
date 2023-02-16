@@ -15,9 +15,9 @@ jobs:
       uses: juliangruber/read-file-action@v1
       with:
         path: ./dependencies.json
-    - name: Build a dep
-      run: echo "${{ steps.package.outputs.content }}"
-        # echo "git clone --depth 1 -b ${{ fromJson(steps.package.outputs.content).mpfr.vers }} ${{ fromJson(steps.package.outputs.content).mpfr.url }}"
+    - name: Parse test 1
+      run: echo "${{ steps.deps.outputs.content }}" && \
+           echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.vers }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"
 
     # - name: Checkout MPFR
     #   uses: actions/checkout@v3
