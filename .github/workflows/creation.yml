@@ -1,9 +1,9 @@
 name: As He Creates So He Destroys
-# on:
-#   push:
-#     branches: [$default-branch, shain/*]
-#   pull_request:
-#     branches: [$default-branch]
+on:
+  push:
+    branches: [$default-branch, shain/*]
+  pull_request:
+    branches: [$default-branch]
 jobs:
   compile:
     runs-on: ubuntu-latest
