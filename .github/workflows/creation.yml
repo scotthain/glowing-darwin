@@ -16,8 +16,9 @@ jobs:
       with:
         path: ./dependencies.json
     - name: Parse test 1
-      run: echo "${{ steps.deps.outputs.content }}" && \
-           echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.vers }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"
+      run: echo "${{ steps.deps.outputs.content }}"
+    - name: Parse test 2
+      run: echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.vers }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"
 
     # - name: Checkout MPFR
     #   uses: actions/checkout@v3
