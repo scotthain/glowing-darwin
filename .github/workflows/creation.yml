@@ -1,0 +1,29 @@
+name: As He Creates So He Destroys
+# on:
+#   push:
+#     branches: [$default-branch, shain/*]
+#   pull_request:
+#     branches: [$default-branch]
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Pupil
+      uses: actions/checkout@v3
+    - name: Read dependencies.json
+      id: deps
+      uses: juliangruber/read-file-action@v1
+      with:
+        path: ./dependencies.json
+    - name: Build a dep
+      run: echo "${{ fromJson(steps.package.outputs.content).mpfr }}"
+      run: echo "git clone --depth 1 -b ${{ fromJson(steps.package.outputs.content).mpfr.vers }} ${{ fromJson(steps.package.outputs.content).mpfr.url }}"
+
+    # - name: Checkout MPFR
+    #   uses: actions/checkout@v3
+    #   run: git clone --depth 1 -b 4.2.0 https://gitlab.inria.fr/mpfr/mpfr
+
+
+    # - name: Install pylint
+    #   run: pip install Pylint
+    # - name: Linting
