@@ -14,17 +14,30 @@ jobs:
       id: deps
       uses: juliangruber/read-file-action@v1
       with:
-        path: ./dependencies.json
-    - name: Parse test 1
-      run: echo "${{ steps.deps.outputs.content }}"
-    - name: Parse test 2
-      run: echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.vers }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"
+        path: ./testdep.json
+        # path: ./dependencies.json
+    - name: Clone zlib
+      uses: actions/checkout@v3
+      with:
+        repository: ${{ fromJson(steps.deps.outputs.content).zlib.url }}
+        ref: ${{ fromJson(steps.deps.outputs.content).zlib.tag }}
 
-    # - name: Checkout MPFR
-    #   uses: actions/checkout@v3
-    #   run: git clone --depth 1 -b 4.2.0 https://gitlab.inria.fr/mpfr/mpfr
+    # - name: Build zlib
+    #   run: git clone--bare --no-checkout \
+    #     --branch ${{ fromJson(steps.deps.outputs.content).zlib.tag }} \
+    #     ${{ fromJson(steps.deps.outputs.content).zlib.url }} && \
+    #     cd zlib && \
+    #     configure --prefix=/awesome/output && \
+    #     make && make install
+    # - name: Build zlib
+    #   run: cd zpmake
 
 
-    # - name: Install pylint
-    #   run: pip install Pylint
-    # - name: Linting
+    # - name: Prep GCC
+    #   run: echo "${{ steps.deps.outputs.content }}"
+    # - name: Prep MPFR
+    #   run: echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.tag }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"
+    # - name: Prep MPC
+    #   run: echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.tag }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"
+    # - name: Prep GMP
+    #   run: echo "git clone --depth 1 -b ${{ fromJson(steps.deps.outputs.content).mpfr.tag }} ${{ fromJson(steps.deps.outputs.content).mpfr.url }}"

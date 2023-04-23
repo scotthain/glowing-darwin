@@ -1,0 +1,7 @@
+{
+    "zlib": {
+        "type": "git",
+        "url": "https://github.com/madler/zlib.git",
+        "tag": "v1.2.13"
+    }
+}
